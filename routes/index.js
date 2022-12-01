@@ -5,7 +5,8 @@ const router = express.Router()
 const { validarId } = require("../middlewares/validarId")
 
 
-const {index,verMedicamento,crearMedicamento,editarMedicamento, vistaUnicaMedicamento, eliminarMedicamento, } = require("../controller/indexController")
+const {index,verMedicamento,crearMedicamento,editarMedicamento, vistaUnicaMedicamento, eliminarMedicamento,crearSession,verSession,cerrarSession } = require("../controller/indexController")
+const auth = require("../middlewares/auth")
 const { check } = require("express-validator")
 
 
@@ -13,7 +14,9 @@ const { check } = require("express-validator")
 router.get('/', index)
 router.get('/ver',verMedicamento )
 router.get('/ver/:id', validarId, vistaUnicaMedicamento)
-
+router.get('/crearsession', crearSession)
+router.get('/versession',auth,verSession)
+router.get('/cerrarsession', cerrarSession)
 
 //Metodo POST
 router.post('/crear', [
